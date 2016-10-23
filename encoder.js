@@ -1,5 +1,6 @@
-
-  var redoneObject = {
+var keyWord;
+var alphabetKey = [];
+var redoneObject = {
     65: "a",
     66: "b",
     67: "c",
@@ -28,7 +29,7 @@
     90: "z"
   }
 
-  var casesarAlphabet = {
+var casesarAlphabet = {
     "a": "z",
     "b": "a",
     "c": "b",
@@ -57,7 +58,7 @@
     "z": "y"
   }
 
-  var heiroglyphicsThing = {
+var heiroglyphicsThing = {
     "a": "<img src='images/heiroglyphics/a.gif'>",
     "b": "<img src='images/heiroglyphics/b.gif'>",
     "c": "<img src='images/heiroglyphics/c.gif'>",
@@ -86,23 +87,138 @@
     "z": "<img src='images/heiroglyphics/z.gif'>"
   }
 
-  $("input[type='radio']").click(function(){
-    $("input:checked").prop('checked', false);
-    $(this).prop('checked', true);
-    document.getElementById("inputText").value = "";
-    document.getElementById("textArea").textContent = "";
-  });
+var runeThing = {
+  "a": "<img src='images/runes/a.gif'>",
+  "b": "<img src='images/runes/b.gif'>",
+  "c": "<img src='images/runes/c.gif'>",
+  "d": "<img src='images/runes/d.gif'>",
+  "e": "<img src='images/runes/e.gif'>",
+  "f": "<img src='images/runes/f.gif'>",
+  "g": "<img src='images/runes/g.gif'>",
+  "h": "<img src='images/runes/h.gif'>",
+  "i": "<img src='images/runes/i.gif'>",
+  "j": "<img src='images/runes/j.gif'>",
+  "k": "<img src='images/runes/k.gif'>",
+  "l": "<img src='images/runes/l.gif'>",
+  "m": "<img src='images/runes/m.gif'>",
+  "n": "<img src='images/runes/n.gif'>",
+  "o": "<img src='images/runes/o.gif'>",
+  "p": "<img src='images/runes/p.gif'>",
+  "q": "<img src='images/runes/q.gif'>",
+  "r": "<img src='images/runes/r.gif'>",
+  "s": "<img src='images/runes/s.gif'>",
+  "t": "<img src='images/runes/t.gif'>",
+  "u": "<img src='images/runes/u.gif'>",
+  "v": "<img src='images/runes/v.gif'>",
+  "w": "<img src='images/runes/w.gif'>",
+  "x": "<img src='images/runes/x.gif'>",
+  "y": "<img src='images/runes/y.gif'>",
+  "z": "<img src='images/runes/z.gif'>"
+}
 
-  $("#inputText").keydown(function(e){
-    var keyThing = e.keyCode;
-    console.log(redoneObject[keyThing]);
-    var bleh = redoneObject[keyThing];
-    if($("input:checked").val() == "echo"){
-      //console.log(redoneObject[keyThing]);
-      $("#textArea").append(redoneObject[keyThing]);
-    } else if($("input:checked").val() == "caesar"){
-      $("#textArea").append(casesarAlphabet[bleh]);
-    } else if($("input:checked").val() == "heiroglyphics"){
-      $("#textArea").append(heiroglyphicsThing[bleh]);
+var reverseCasesar = {
+  "z": "a",
+  "y": "z",
+  "x": "y",
+  "w": "x",
+  "v": "w",
+  "u": "v",
+  "t": "u",
+  "s": "t",
+  "r": "s",
+  "q": "r",
+  "p": "q",
+  "o": "p",
+  "n": "o",
+  "m": "n",
+  "l": "m",
+  "k": "l",
+  "j": "k",
+  "i": "j",
+  "h": "i",
+  "g": "h",
+  "f": "g",
+  "e": "f",
+  "d": "e",
+  "c": "d",
+  "b": "c",
+  "a": "b"
+}
+
+$("input[type='radio']").click(function(){
+  $("input:checked").prop('checked', false);
+  $(this).prop('checked', true);
+  document.getElementById("inputText").value = "";
+  document.getElementById("textArea").textContent = "";
+});
+
+$("#inputText").keydown(function(e){
+  var keyThing = e.keyCode;
+  //console.log(redoneObject[keyThing]);
+  var bleh = redoneObject[keyThing];
+  if($("input:checked").val() == "echo"){
+    $("#textArea").append(redoneObject[keyThing]);
+  } else if($("input:checked").val() == "caesar"){
+    $("#textArea").append(casesarAlphabet[bleh]);
+  } else if($("input:checked").val() == "heiroglyphics"){
+    $("#textArea").append(heiroglyphicsThing[bleh]);
+  } else if($("input:checked").val() == "runes"){
+    $("#textArea").append(runeThing[bleh]);
+  }
+
+  if(keyThing == 8){
+    var thingy = document.getElementById("textArea");
+    thingy.textContent = thingy.textContent.substr(0,thingy.textContent.length - 1);
+  }
+
+  else if(keyThing == 32){
+    var thingy2 = document.getElementById("textArea");
+    thingy2.textContent += " ";
+  }
+});
+
+$("#translationInputText").keydown(function(e){
+  var keyThingTwo = e.keyCode;
+  var blehTwo = redoneObject[keyThingTwo];
+  $("#translationArea").append(reverseCasesar[blehTwo]);
+
+  if(keyThingTwo == 8){
+    var thingy = document.getElementById("translationArea");
+    thingy.textContent = thingy.textContent.substr(0,thingy.textContent.length - 1);
+  }
+
+  else if(keyThingTwo == 32){
+    var thingy2 = document.getElementById("translationArea");
+    thingy2.textContent += " ";
+  }
+});
+
+function getKeyWord()
+{
+  keyWord = $("#keywordInput").val();
+  keyWord = keyWord.toUpperCase();
+  keyWord = keyWord.split("");
+  for(var i = 0; i < keyWord.length; i++)
+  {
+    alphabetKey.push(keyWord[i]);
+  }
+  console.log(alphabetKey);
+  for(var i = 65; i < 91; i++){
+    if(keyWord.indexOf(String.fromCharCode(i)) > -1){}
+    else
+    {
+      alphabetKey.push(String.fromCharCode(i));
     }
-  });
+  }
+  console.log(alphabetKey);
+  //fdsaa++;
+}
+
+$("#keywordInput").keydown(function(e){
+  if(e.keyCode == 13)
+  {
+    var text = $("#keywordInput").val();
+    console.log(text);
+    getKeyWord();
+  }
+});
