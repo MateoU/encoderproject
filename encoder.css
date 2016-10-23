@@ -39,7 +39,7 @@ body {
   font-size: 16px;
 }
 
-#thing5 {
+.thing5 {
 font-family: 'Courier New', sans-serif;
 background-color: #009FCA; /* Blue */
   border: none;
@@ -52,7 +52,7 @@ background-color: #009FCA; /* Blue */
   margin-top: 10px;
 }
 
-#thing5:hover {
+.thing5:hover {
   cursor: pointer;
   transition: all  0.3s ease;
   background-color: #007594;

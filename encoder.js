@@ -192,7 +192,7 @@ $("#translationInputText").keydown(function(e){
     thingy2.textContent += " ";
   }
 });
-
+var hello = 0;
 function getKeyWord()
 {
   keyWord = $("#keywordInput").val();
@@ -211,8 +211,46 @@ function getKeyWord()
     }
   }
   console.log(alphabetKey);
-  //fdsaa++;
+  hello++;
 }
+
+$("#keywordInput").keydown(function(e){
+  if(hello > 0){
+    var keyThingThree = e.keyCode;
+    keyThingThree = redoneObject[keyThingThree];
+    //keyThingThree = keyThingThree.split("")
+    var objectThing = {
+    "a":alphabetKey[0],
+    "b":alphabetKey[1],
+    "c":alphabetKey[2],
+    "d":alphabetKey[3],
+    "e":alphabetKey[4],
+    "f":alphabetKey[5],
+    "g":alphabetKey[6],
+    "h":alphabetKey[7],
+    "i":alphabetKey[8],
+    "j":alphabetKey[9],
+    "k":alphabetKey[10],
+    "l":alphabetKey[11],
+    "m":alphabetKey[12],
+    "n":alphabetKey[13],
+    "o":alphabetKey[14],
+    "p":alphabetKey[15],
+    "q":alphabetKey[16],
+    "r":alphabetKey[17],
+    "s":alphabetKey[18],
+    "t":alphabetKey[19],
+    "u":alphabetKey[20],
+    "v":alphabetKey[21],
+    "w":alphabetKey[22],
+    "x":alphabetKey[23],
+    "y":alphabetKey[24],
+    "z":alphabetKey[25]
+  }
+    console.log(objectThing[keyThingThree]);
+    $("#keywordCipher").append(objectThing[keyThingThree]);
+  }
+});
 
 $("#keywordInput").keydown(function(e){
   if(e.keyCode == 13)
